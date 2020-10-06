@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate Card</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="cardPopUp">
+    <div id="close">
+      <a href="javascript:closeWindow()">
+        <img src="cerrar.png" alt="">
+      </a>
+    </div>
+    <center><img src="tarjeta-de-credito.png" class="responsiveImg" alt=""></center>
+    <h3 class="centerText">Your card <span id="answer"></span></h2>
+    <br>
+    <button class="btn" onclick="closeWindow()"><span id="btnAnswer"></span></button>
+  </div>
+  <div class="container">
+    <nav>
+      <h2 class="centerText">Lorem Ipsum</h2>
+    </nav>
+    <div id="row1">
+      <img src="deer.png" class="responsiveImg" alt="">
+      <h3>What is Lorem Ipsum?</h3>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+        when an unknown printer took a galley of type and scrambled it to make a type 
+        specimen book. It has survived not only five centuries, but also the leap into 
+        electronic typesetting, remaining essentially unchanged. It was popularised in 
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
+    </div>
+    <main id="row2">
+      <h3>Why do we use it?</h3>
+      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a 
+        piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard 
+        McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of 
+        the more obscure Latin words, consectetur, from a Lorem Ipsum passage.</p>
+      <br>
+      <div class="card">
+        <h3 class="centerText">Enter your card details</p>
+        <br>
+        <center>
+          <input type="password" name="" id="txtValidet">
+          <br><br>
+          <button id="btnValidate" class="btn">Verificar</button>
+        </center>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; Vlady - Validaci&oacute;n Tarjeta </p>
+    </footer>
+  </div>
+  <script>
+    window.addEventListener('load', init , false)
+    function init(){
+      const btn = document.querySelector('#btnValidate');
+      const text = document.getElementById('txtValidet');
+      let answer = document.getElementById('answer');
+      //codigo prueba -> 4083952015263
+      btn.addEventListener('click', function(e){
+        const chain = text.value;
+        let result = validateFix(chain);
+        let showresult = hideArray(chain);
+
+        if(result > 0){
+          document.getElementById('cardPopUp').style.display = "block";
+          document.getElementById('answer').innerHTML = showresult+' is valid!';
+          document.getElementById('btnAnswer').innerHTML = 'OK!';
+          text.value = "";
+        }
+        else {
+          document.getElementById('cardPopUp').style.display = "block";
+          document.getElementById('answer').innerHTML = showresult+' is invalid!';
+          document.getElementById('btnAnswer').innerHTML = 'Reintentar';
+          text.value = "";
+        }
+
+        console.log(result);
+
+      }, false);
+
+      text.addEventListener('keypress', onlyNumbers, false);
+
+      }
+      
+  </script>
+  <script src="validation.js"></script>
+</body>
+</html>
